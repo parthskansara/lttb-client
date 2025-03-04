@@ -4,6 +4,7 @@ import { createPlaylistForFollower } from "../services/UserAPI.tsx";
 import { getSongUriFromClipboard } from "../utils/clipboard";
 import Toast from "./Toast.tsx";
 import { Circles } from "react-loader-spinner";
+import { IoMdRefresh } from "react-icons/io";
 
 interface Followers {
   followerName: string;
@@ -25,18 +26,19 @@ const FollowersPanel = () => {
     setShowToast(false);
   };
 
+  const getFollowers = async (refreshFollowers: boolean) => {
+    try {
+      setIsLoading(true);
+      const data = await ProfileAPI.getFollowers(refreshFollowers);
+      setFollowers(data);
+      setIsLoading(false);
+    } catch (err) {
+      console.error("Error fetching top artists");
+    }
+  };
+
   useEffect(() => {
-    const getFollowers = async () => {
-      try {
-        setIsLoading(true);
-        const data = await ProfileAPI.getFollowers();
-        setFollowers(data);
-        setIsLoading(false);
-      } catch (err) {
-        console.error("Error fetching top artists");
-      }
-    };
-    getFollowers();
+    getFollowers(false);
   }, []);
 
   const handleShare = async (followerUserId: string) => {
@@ -82,6 +84,10 @@ const FollowersPanel = () => {
     return displayString.substring(0, 20) + "...";
   };
 
+  const handleRefresh = async () => {
+    await getFollowers(true);
+  };
+
   return (
     <>
       {isLoading || !followers ? (
@@ -91,7 +97,15 @@ const FollowersPanel = () => {
         </div>
       ) : (
         <>
-          <h2 className="mt-4">Start sharing music with your followers: </h2>
+          <div className="flex flex-row items-center justify-between mt-4">
+            <div className="flex-grow"></div>
+            <h2 className="flex-grow text-center">
+              Start sharing music with your followers:{" "}
+            </h2>
+            <div className="flex-grow flex justify-end" onClick={handleRefresh}>
+              <IoMdRefresh size="18px" className="text-spotify-green" />
+            </div>
+          </div>
           {showToast && (
             <Toast
               category={toastMessage.category}

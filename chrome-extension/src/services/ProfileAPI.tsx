@@ -42,9 +42,11 @@ const getTopArtists = async () => {
   }
 };
 
-const getFollowers = async () => {
+const getFollowers = async (refreshFollowers: boolean) => {
   try {
-    const response = await fetch(`${apiUrl}/api/follower`);
+    const response = await fetch(
+      `${apiUrl}/api/follower?refresh=${refreshFollowers}`
+    );
     if (response.status === 401) {
       return response.json().then(() => {
         window.location.href = "/";
