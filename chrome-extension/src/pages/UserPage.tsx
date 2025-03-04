@@ -77,8 +77,8 @@ const UserPage = () => {
           {/* <ArtistsPanel /> */}
           {/* {isProfileLoaded ? <FollowersPanel/> : <p>Loading Followers...</p>} */}
           <p className="text-md mx-8 mt-8">
-            Right click on the song you want to share &gt; Share &gt; Copy Song
-            Link &gt; <br></br> Click on the follower you want to share with!
+            Right click on the song you want to share &gt; Share &gt;<br></br>{" "}
+            Copy Song Link &gt; Click on the follower you want to share with!
           </p>
           <p className="text-md mx-4 mt-2">
             This will create a playlist called
@@ -86,7 +86,7 @@ const UserPage = () => {
             &nbsp;for your friend.
           </p>
           <FollowersPanel />
-          <button onClick={handleLogout}>
+          <button onClick={handleLogout} className="mt-4">
             {isLoggingOut ? <Circles height={20} /> : "Logout"}
           </button>
         </>

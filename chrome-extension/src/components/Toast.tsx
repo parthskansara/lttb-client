@@ -23,7 +23,7 @@ const Toast: React.FC<ModalProps> = ({
   };
   return (
     <div
-      className="modal-overlay fixed inset-0 flex items-center justify-center bg-red-500 mx-16 my-32 text-md rounded-xl shadow-lg shadow-700/50 text-black"
+      className="modal-overlay fixed inset-0 flex items-center justify-center bg-red-200 border-2 border-red-600 mx-16 my-32 text-md rounded-lg shadow-xl shadow-white-700/50 text-red-600"
       onClick={onClose}
     >
       <div className="modal-content p-6" onClick={(e) => e.stopPropagation()}>

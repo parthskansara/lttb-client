@@ -58,7 +58,6 @@ const FollowersPanel = () => {
     });
 
     if (songUri) {
-      console.log(`Sharing ${songUri} with ${followerUserId}`);
       const data = { followerUserId: followerUserId, songUri: songUri };
       const response = await createPlaylistForFollower(data)
         .then(() => {
@@ -81,7 +80,7 @@ const FollowersPanel = () => {
   };
 
   const truncateString = (displayString: string) => {
-    return displayString.substring(0, 20) + "...";
+    return displayString.substring(0, 15) + "...";
   };
 
   const handleRefresh = async () => {
@@ -114,32 +113,23 @@ const FollowersPanel = () => {
               closeToast={closeToast}
             />
           )}
-          <div className="overflow-auto w-[500px] mx-auto grid grid-cols-2 gap-1">
+          <div className="overflow-auto w-[400px] mx-auto grid grid-cols-2 gap-1 mt-2">
             {followers.map((follower) => (
               <div
                 key={follower?.followerId}
                 onClick={() => handleShare(follower?.followerId)}
-                className="mx-auto my-2 p-2 rounded-xl"
+                className="mx-auto my-[4px] rounded-xl"
               >
-                {/* <button
-                  className={`${
-                    isCreatingPlaylist === follower?.followerId
-                      ? `bg-black`
-                      : playlistCreationError === follower?.followerId
-                      ? `bg-red-700`
-                      : `bg-spotify-green`
-                  } px-4 text-xs w-[200px]`}
-                > */}
                 <button
                   className={`${
                     shareCompleted === follower.followerId
                       ? `bg-green-950`
                       : `bg-spotify-green`
-                  }  px-4 text-xs w-[200px]`}
+                  }  px-2 text-xs w-[170px]`}
                 >
                   {shareCompleted === follower.followerId
                     ? "Shared! ❤️"
-                    : follower?.followerName?.length > 20
+                    : follower?.followerName?.length > 15
                     ? truncateString(follower.followerName)
                     : follower?.followerName}
                 </button>

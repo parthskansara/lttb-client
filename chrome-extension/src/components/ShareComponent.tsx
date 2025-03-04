@@ -20,8 +20,8 @@ const ShareComponent = () => {
       <p className="mt-4">
         This might be happening because your friend isn't logged in. <br></br>
         <br></br>
-        Share this with your friend and ask them to login to start sending them
-        your recommendations.
+        Share this extension with your friend and have them log in to start
+        sending them your recommendations.
       </p>
       <button onClick={copyLink} className="text-white mt-4">
         {copyStatus === "" ? "Copy Link" : copyStatus}
