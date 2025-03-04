@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "listentothis,bro",
+  "version": "1.0",
+  "description": "Allows users to easily share music via Spotify",
+  "icons": {
+    "16": "logo-2.png",
+    "32": "logo-2.png",
+    "48": "logo-2.png",
+    "128": "logo-2.png"
+  },
+  "action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["tabs", "storage", "clipboardRead"],
+  "host_permissions": [
+    "http://localhost:5173/*",
+    "http://localhost:3001/*",
+    "https://lttb-server.vercel.app/*",
+    "http://lttb-server.vercel.app/*"
+  ]
+}

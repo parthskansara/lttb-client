@@ -1,0 +1,47 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    outDir: "./dist",
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        background: path.resolve(__dirname, "src/background.ts"),
+      },
+      output: {
+        entryFileNames: (chunkInfo) => {
+          return chunkInfo.name === "background"
+            ? "[name].js"
+            : "assets/[name]-[hash].js";
+        },
+      },
+    },
+  },
+  resolve: {
+    alias: {
+      picocss: path.resolve(__dirname, "../node_modules/@picocss/pico/css"),
+    },
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://lttb-server.vercel.app",
+      },
+    },
+  },
+});
+
+// import { defineConfig } from "vite";
+// import react from "@vitejs/plugin-react";
+// import { crx } from "@crxjs/vite-plugin";
+// import manifest from "./manifest.json";
+// import commonjs from "@rollup/plugin-commonjs";
+
+// export default defineConfig({
+//   plugins: [react(), crx({ manifest }), commonjs()],
+// });
